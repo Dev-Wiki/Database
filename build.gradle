@@ -1,0 +1,32 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    apply from : "${rootDir}/config.gradle"
+    repositories {
+        google()
+        jcenter()
+        customMaven.each {name, mavenURL ->
+            maven { url mavenURL }
+        }
+    }
+    dependencies {
+        gradlePlugins.each { name, value -> classpath value }
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    apply from : "${rootDir}/config.gradle"
+    repositories {
+        google()
+        jcenter()
+        customMaven.each {name, mavenURL ->
+            maven { url mavenURL }
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
